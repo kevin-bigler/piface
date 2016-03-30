@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>PiFace - Picross Puzzle Solver</title>
+  </head>
+  <body>
+    <h1>PiFace - Picross Puzzle Solver</h1>
+    <p></p>
+    <div id="log-output">
+      <h2>Log output.</h2>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    // App Namespace
+    var pf = {};
+
+    /*
+      Model:
+      ------
+      Puzzle
+      Grid
+      Row
+      Square
+      Definition
+
+      Approach:
+      ---------
+      Fully-Filled
+      Fully-Exed
+    */
+  </script>
+
+  <script src="./lib/jquery-2.2.2.min.js"></script>
+
+  <script src="./main/main.js"></script>
+  <script src="./main/square-state.js"></script>
+
+  <!-- These are the only exceptions to the App Namespace (instead in 'common' namespace) -->
+  <script type="text/javascript"> var common = {}; </script>
+  <script src="./common/common.js"></script>
+  <script src="./common/log.js"></script>
+
+  <script src="./model/puzzle.js"></script>
+  <script src="./model/grid.js"></script>
+  <script src="./model/row.js"></script>
+  <script src="./model/square.js"></script>
+  <script src="./model/definition.js"></script>
+
+  <script src="./approach/fully-filled.js"></script>
+  <script src="./approach/fully-exed.js"></script>
+
+  <script type="text/javascript">
+    console.log('Hello, PiFace!');
+
+    pf.main();
+  </script>
+</html>
