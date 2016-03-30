@@ -10,5 +10,8 @@ pf.main = function() {
   }
   common.log(testObject);
 
-  // TODO generate a puzzle here
+  var puzzle = new pf.Puzzle();
+  puzzle.grid.initWithSize(10, 10);
+
+  puzzle.grid.getSquare(2, 3);
 }

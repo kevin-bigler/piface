@@ -21,6 +21,21 @@ var common = {
 	isObject: function(objectToCheck) {
 		return objectToCheck !== null && typeof objectToCheck === 'object';
 	},
+	isNonEmptyArray: function(arr) {
+    return arr && common.isArray(arr) && arr.length > 0;
+  },
+	arrayContainsIndex: function(arr, i) {
+		if ( ( i !== 0 && ! i ) || ! arr )
+		 	return false;
+
+		if ( common.isArray(arr) && common.isNumber(parseInt(i)) ) {
+			return parseInt(i) < arr.length;
+		}  else if ( common.isObject(arr) ) {
+			return arr[i] ? true : false;
+		}
+
+		return false;
+	},
 	arrayValues: function(input) {
 		//  discuss at: http://phpjs.org/functions/array_values/
 		// original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
