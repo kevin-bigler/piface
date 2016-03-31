@@ -16,7 +16,7 @@ common.log = function(output) {
   else
     outputString = 'unknown output string';
 
-  console.log('common.log(), output: ');
+  // console.log('common.log(), output: ');
   console.log(output);
 
   $('#log-output').append('<br>');

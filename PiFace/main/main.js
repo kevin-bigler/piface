@@ -13,5 +13,34 @@ pf.main = function() {
   var puzzle = new pf.Puzzle();
   puzzle.grid.initWithSize(10, 10);
 
-  puzzle.grid.getSquare(2, 3);
+  var theSquare = puzzle.grid.getSquare(2, 3);
+
+  common.log('theSquare at 2,3:');
+  common.log(theSquare);
+  common.log(theSquare.toString());
+
+  var testRow = new pf.Row();
+  // testRow.squares = [new pf.Square, new pf.Square, new pf.Square];
+  testRow.initWithLength(5);
+
+  common.log('testRow.squares:');
+  common.log(testRow.squares);
+
+  common.log('testRow:');
+  common.log(testRow.toString());
+
+  testRow.exSquare(0);
+  testRow.fillSquare(1);
+  testRow.getSquare(2).setFilled();
+  testRow.exVacantSquares();
+  testRow.vacateSquare(4);
+  testRow.fillVacantSquares();
+
+  common.log('testRow now:');
+  common.log(testRow.toString());
+
+  var rowFromPuzzle = puzzle.grid.getRow(1);
+
+  common.log('rowFromPuzzle:');
+  common.log(rowFromPuzzle);
 }

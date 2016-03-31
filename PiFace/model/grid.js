@@ -12,12 +12,17 @@ pf.Grid = function() {
 pf.Grid.prototype.getSquare = function(x, y) {
   common.log('getSquare(x,y), x: ' + x + ', y: ' + y);
 
-  if (common.arrayContainsIndex(this.squres, x) && common.arrayContainsIndex(this.squares[x], y)) {
+  // common.log('grid squares for lookup:');
+  // common.log(this.squares);
+
+  if (common.arrayContainsIndex(this.squares, x) && common.arrayContainsIndex(this.squares[x], y)) {
     common.log('we can get x, y');
-    this.squares[x][y];
+    return this.squares[x][y];
   } else {
     common.log('we cannot get x, y');
   }
+
+  return null;
 };
 
 pf.Grid.prototype.initWithSize = function(width, height) {
@@ -43,5 +48,62 @@ pf.Grid.prototype.initWithSize = function(width, height) {
   common.log(this.squares);
 };
 
-// pf.Grid.prototype.func = function() {};
-// pf.Grid.prototype.func = function() {};
+pf.Grid.prototype.getRow = function(j) {
+  if ( ! common.isArray(this.squares) )
+    return null;
+
+  var rowSquares = [];
+
+  // go through each column (~width)
+  for (var i = 0; i < this.squares.length; i++) {
+    // go through the row (square) in the column (~height = i)
+    // var columnSquares = [];
+    // for (var j = 0; j < height; j++) {
+    //   // placeholder new Square in each spot
+    //   columnSquares.push(new pf.Square());
+    // }
+    if ( common.isArray(this.squares[i]) && common.arrayContainsIndex(this.squares[i], j) && this.squares[i][j] instanceof pf.Square)
+      rowSquares.push(this.squares[i][j]);
+  }
+
+  common.log('rowSquares in getRow():');
+  common.log(rowSquares);
+
+  var row = new pf.Row();
+  row.initWithSquares(rowSquares);
+
+  return row;
+};
+
+pf.Grid.prototype.getColumn = function(i) {
+  if ( ! common.isArray(this.squares) )
+    return null;
+
+  var rowSquares = [];
+
+  // go through each column (~width)
+  // for (var i = 0; i < this.squares.length; i++) {
+    // go through the row (square) in the column (~height = i)
+    // var columnSquares = [];
+    // for (var j = 0; j < height; j++) {
+    //   // placeholder new Square in each spot
+    //   columnSquares.push(new pf.Square());
+    // }
+  if ( common.isArray(this.squares) && common.arrayContainsIndex(this.squares, i) ) // && this.squares[i][j] instanceof pf.Square)
+    rowSquares = this.squares[i];
+  // }
+
+  common.log('rowSquares in getColumn():');
+  common.log(rowSquares);
+
+  var row = new pf.Row();
+  row.initWithSquares(rowSquares);
+
+  return row;
+};
+
+pf.Grid.prototype.toString = function(i) {
+  // TODO iterate etc
+
+  return '';
+}

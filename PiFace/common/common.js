@@ -6,20 +6,20 @@ var common = {
 			return false;
 	},
 	isString: function(variable) {
-		return typeof variable == 'string' || variable instanceof String;
+		return variable !== undefined && variable !== null && (typeof variable === 'string' || variable instanceof String);
 	},
 	isNumber: function(variable) {
-		return typeof variable == 'number' || variable.toFixed;
+		return variable !== undefined && variable !== null && (typeof variable === 'number' || variable.toFixed);
 	},
 	isArray: function(variable) {
-		return variable.constructor === Array;
+		return variable !== undefined && variable !== null && variable.constructor === Array;
 	},
-	isFunction: function(functionToCheck) {
+	isFunction: function(variable) {
  		var getType = {};
- 		return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+ 		return variable !== undefined && variable !== null && getType.toString.call(variable) === '[object Function]';
 	},
-	isObject: function(objectToCheck) {
-		return objectToCheck !== null && typeof objectToCheck === 'object';
+	isObject: function(variable) {
+		return variable !== undefined && variable !== null && typeof variable === 'object';
 	},
 	isNonEmptyArray: function(arr) {
     return arr && common.isArray(arr) && arr.length > 0;
