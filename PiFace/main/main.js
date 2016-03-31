@@ -43,4 +43,13 @@ pf.main = function() {
 
   common.log('rowFromPuzzle:');
   common.log(rowFromPuzzle);
+
+  rowFromPuzzle.exSquare(0);
+  rowFromPuzzle.fillSquare(1);
+  rowFromPuzzle.getSquare(2).setFilled();
+  rowFromPuzzle.exVacantSquares();
+  rowFromPuzzle.vacateSquare(4);
+  rowFromPuzzle.fillVacantSquares();
+
+  common.log();
 }
