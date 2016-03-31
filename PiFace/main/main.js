@@ -51,5 +51,9 @@ pf.main = function() {
   rowFromPuzzle.vacateSquare(4);
   rowFromPuzzle.fillVacantSquares();
 
-  common.log();
+  puzzle.grid.getSquare(6, 6).setFilled();
+  puzzle.grid.getSquare(7, 7).setFilled();
+
+  common.log('grid now:');
+  common.log(puzzle.grid.toString());
 }

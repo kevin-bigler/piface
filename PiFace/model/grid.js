@@ -28,6 +28,9 @@ pf.Grid.prototype.getSquare = function(x, y) {
 pf.Grid.prototype.initWithSize = function(width, height) {
   common.log('initWithSize(width, height), width: ' + width + ', height: ' + height);
 
+  this.width = width;
+  this.height = height;
+
   common.log('grid squares before:');
   common.log(this.squares);
 
@@ -102,8 +105,32 @@ pf.Grid.prototype.getColumn = function(i) {
   return row;
 };
 
-pf.Grid.prototype.toString = function(i) {
-  // TODO iterate etc
+pf.Grid.prototype.toString = function() {
+  // TODO this method could use more checks, or at the very least a try-catch
+  if ( ! common.isArray(this.squares) )
+    return '?grid?';
 
-  return '';
+  var rows = [];
+
+  // go through each row (~height)
+  for (var y = 0; y < this.height; y++) {
+    var rowSquares = [];
+    // go through the column (square) per row (~width)
+    for (var x = 0; x < this.width; x++) {
+      rowSquares.push(this.squares[x][y]);
+    }
+
+    var row = new pf.Row();
+    row.initWithSquares(rowSquares);
+
+    rows.push(row.toString());
+  }
+
+  var linebreak = '<br>\n';
+  var bookendTop = linebreak + '/' + new Array(this.width * 2).join('-') + '\\' + linebreak;
+  var bookendBottom = linebreak + '\\' + new Array(this.width * 2).join('-') + '/' + linebreak;
+
+  var str = bookendTop + rows.join(linebreak) + bookendBottom;
+
+  return str;
 }
