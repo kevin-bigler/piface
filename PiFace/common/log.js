@@ -12,7 +12,7 @@ common.log = function(output) {
   else if (output === null)
     outputString = 'null';
   else if (output === undefined)
-    outputString = 'undefined';
+    outputString = '<br>', output = '';
   else
     outputString = 'unknown output string';
 

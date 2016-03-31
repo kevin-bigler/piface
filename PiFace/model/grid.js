@@ -10,13 +10,13 @@ pf.Grid = function() {
 // pf.Grid.prototype.func = function() {};
 
 pf.Grid.prototype.getSquare = function(x, y) {
-  common.log('getSquare(x,y), x: ' + x + ', y: ' + y);
+  // common.log('getSquare(x,y), x: ' + x + ', y: ' + y);
 
   // common.log('grid squares for lookup:');
   // common.log(this.squares);
 
   if (common.arrayContainsIndex(this.squares, x) && common.arrayContainsIndex(this.squares[x], y)) {
-    common.log('we can get x, y');
+    // common.log('we can get x, y');
     return this.squares[x][y];
   } else {
     common.log('we cannot get x, y');
@@ -26,13 +26,13 @@ pf.Grid.prototype.getSquare = function(x, y) {
 };
 
 pf.Grid.prototype.initWithSize = function(width, height) {
-  common.log('initWithSize(width, height), width: ' + width + ', height: ' + height);
+  // common.log('initWithSize(width, height), width: ' + width + ', height: ' + height);
 
   this.width = width;
   this.height = height;
 
-  common.log('grid squares before:');
-  common.log(this.squares);
+  // common.log('grid squares before:');
+  // common.log(this.squares);
 
   this.squares = [];
 
@@ -47,8 +47,8 @@ pf.Grid.prototype.initWithSize = function(width, height) {
     this.squares.push(columnSquares);
   }
 
-  common.log('grid squares now:');
-  common.log(this.squares);
+  // common.log('grid squares now:');
+  // common.log(this.squares);
 };
 
 pf.Grid.prototype.getRow = function(j) {
@@ -69,8 +69,8 @@ pf.Grid.prototype.getRow = function(j) {
       rowSquares.push(this.squares[i][j]);
   }
 
-  common.log('rowSquares in getRow():');
-  common.log(rowSquares);
+  // common.log('rowSquares in getRow():');
+  // common.log(rowSquares);
 
   var row = new pf.Row();
   row.initWithSquares(rowSquares);
@@ -96,8 +96,8 @@ pf.Grid.prototype.getColumn = function(i) {
     rowSquares = this.squares[i];
   // }
 
-  common.log('rowSquares in getColumn():');
-  common.log(rowSquares);
+  // common.log('rowSquares in getColumn():');
+  // common.log(rowSquares);
 
   var row = new pf.Row();
   row.initWithSquares(rowSquares);

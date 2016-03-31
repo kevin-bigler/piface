@@ -2,6 +2,7 @@ pf.Row = function() {
   // this.foos = ball;
   this.length = 0;
   this.squares = [];
+  this.definition = new pf.Definition();
 };
 
 // pf.Row.prototype.property = value;
