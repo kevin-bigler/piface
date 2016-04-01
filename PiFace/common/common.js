@@ -29,7 +29,7 @@ var common = {
 		 	return false;
 
 		if ( common.isArray(arr) && common.isNumber(parseInt(i)) ) {
-			return parseInt(i) < arr.length;
+			return parseInt(i) >= 0 && parseInt(i) < arr.length;
 		}  else if ( common.isObject(arr) ) {
 			return arr[i] ? true : false;
 		}
@@ -58,5 +58,22 @@ var common = {
 		}
 
 		return tmpArr;
+	},
+	copyArray: function(arr) {
+		if ( common.isArray(arr) )
+			return arr.slice();
+		else
+			return arr;
+	},
+	sortArrayOfNumbers: function(arr) {
+		if ( ! common.isArray(arr) )
+			return arr;
+
+		arr.sort(function(a, b) {
+			if ( common.isNumber(parseInt(a)) && common.isNumber(parseInt(b)) )
+				return parseInt(a) - parseInt(b);
+		});
+
+		return arr;
 	}
 };

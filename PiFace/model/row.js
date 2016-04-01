@@ -9,8 +9,10 @@ pf.Row = function() {
 // pf.Row.prototype.func = function() {};
 
 pf.Row.prototype.initWithLength = function(length) {
-  if ( ! common.isNumber(parseInt(length)) )
+  if ( ! common.isNumber(parseInt(length)) ) {
     this.squares = [];
+    return;
+  }
 
   this.squares = [];
   for (var i = 0; i < length; i++) {
@@ -20,8 +22,10 @@ pf.Row.prototype.initWithLength = function(length) {
 };
 
 pf.Row.prototype.initWithSquares = function(squares) {
-  if ( ! common.isArray(squares) )
+  if ( ! common.isArray(squares) ) {
     this.squares = [];
+    return;
+  }
 
   this.squares = squares;
 };
@@ -119,6 +123,31 @@ pf.Row.prototype.isSolved = function() {
 
   // TODO this depends on a definition
   return false;
+};
+
+pf.Row.prototype.getRuns = function() {
+  if ( ! common.isArray(this.squares) )
+    return [];
+
+  var squareIsFilled = function(sq) { return sq && sq instanceof pf.Square && sq.isFilled() };
+  var isLastValueNumber = function(arr) { return common.isArray(arr) && arr.length > 0 && common.isNumber(parseInt(arr[arr.length - 1])) };
+
+  var runs = [];
+  var prevSquare = null;
+  $.each(this.squares, function(i, e) {
+
+    if ( squareIsFilled(e) ) {
+      if ( i > 0 && squareIsFilled(prevSquare) && isLastValueNumber(runs) )
+        runs[runs.length - 1] = parseInt(runs[runs.length - 1]) + 1;
+      else
+        runs.push(1);
+    }
+
+    prevSquare = e;
+    
+  });
+
+  return runs;
 };
 
 pf.Row.prototype.toString = function() {

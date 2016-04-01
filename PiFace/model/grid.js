@@ -9,21 +9,7 @@ pf.Grid = function() {
 // pf.Grid.prototype.property = value;
 // pf.Grid.prototype.func = function() {};
 
-pf.Grid.prototype.getSquare = function(x, y) {
-  // common.log('getSquare(x,y), x: ' + x + ', y: ' + y);
-
-  // common.log('grid squares for lookup:');
-  // common.log(this.squares);
-
-  if (common.arrayContainsIndex(this.squares, x) && common.arrayContainsIndex(this.squares[x], y)) {
-    // common.log('we can get x, y');
-    return this.squares[x][y];
-  } else {
-    common.log('we cannot get x, y');
-  }
-
-  return null;
-};
+// TODO copy many of the functions from pf.Row (row.js) into here
 
 pf.Grid.prototype.initWithSize = function(width, height) {
   // common.log('initWithSize(width, height), width: ' + width + ', height: ' + height);
@@ -49,6 +35,22 @@ pf.Grid.prototype.initWithSize = function(width, height) {
 
   // common.log('grid squares now:');
   // common.log(this.squares);
+};
+
+pf.Grid.prototype.getSquare = function(x, y) {
+  // common.log('getSquare(x,y), x: ' + x + ', y: ' + y);
+
+  // common.log('grid squares for lookup:');
+  // common.log(this.squares);
+
+  if (common.arrayContainsIndex(this.squares, x) && common.arrayContainsIndex(this.squares[x], y)) {
+    // common.log('we can get x, y');
+    return this.squares[x][y];
+  } else {
+    common.log('we cannot get x, y');
+  }
+
+  return null;
 };
 
 pf.Grid.prototype.getRow = function(j) {

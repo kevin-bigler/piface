@@ -1,8 +1,8 @@
 pf.main = function() {
   common.log('pf.main()');
 
-  // var puzzle = new pf.Puzzle();
-  // puzzle.grid.initWithSize(10, 10);
+  var puzzle = new pf.Puzzle();
+  puzzle.grid.initWithSize(10, 10);
   //
   // var theSquare = puzzle.grid.getSquare(2, 3);
   //
@@ -51,6 +51,10 @@ pf.main = function() {
   common.log('isSolved? ' + (testRow.isSolved() ? 'yes' : 'no'));
   common.log('isComplete? ' + (testRow.isComplete() ? 'yes' : 'no'));
 
+  common.log();
+  common.log('testRow runs:');
+  common.log(testRow.getRuns());
+
   var rowFromPuzzle = puzzle.grid.getRow(1);
 
   common.log();
@@ -62,7 +66,18 @@ pf.main = function() {
   rowFromPuzzle.getSquare(2).setFilled();
   rowFromPuzzle.exVacantSquares();
   rowFromPuzzle.vacateSquare(4);
+  rowFromPuzzle.fillSquare(7);
+  rowFromPuzzle.fillSquare(8);
+  rowFromPuzzle.fillSquare(9);
   rowFromPuzzle.fillVacantSquares();
+
+  common.log();
+  common.log('rowFromPuzzle now:');
+  common.log(rowFromPuzzle.toString());
+
+  common.log();
+  common.log('rowFromPuzzle runs:');
+  common.log(rowFromPuzzle.getRuns());
 
   puzzle.grid.getSquare(6, 6).setFilled();
   puzzle.grid.getSquare(7, 7).setFilled();
@@ -70,4 +85,15 @@ pf.main = function() {
   common.log();
   common.log('grid now:');
   common.log(puzzle.grid.toString());
+
+  var defTest = new pf.Definition();
+  defTest.initWithRuns([1, 3, 1, 2]);
+
+  common.log();
+  common.log('defTest:');
+  common.log(defTest.toString());
+  common.log('totalFilled: ' + defTest.getTotalFilled());
+  common.log('minSquares: ' + defTest.getMinSquares());
+  common.log('minRun: ' + defTest.getMinRun());
+  common.log('maxRun: ' + defTest.getMaxRun());
 }
