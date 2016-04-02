@@ -1,5 +1,56 @@
-pf.main = function() {
-  common.log('pf.main()');
+pf.Main = function() {
+  common.log('pf.Main()');
+}
+
+pf.Main.prototype.main = function() {
+  common.log('pf.Main.main()');
+  // this.modelTests();
+
+  this.d3Tests();
+}
+
+pf.Main.prototype.d3Tests = function() {
+  var canvas = d3.select('body').append('svg').attr('width', 500).attr('height', 500);
+
+  var circle = canvas.append('circle')
+          .attr('r', 100)
+          .attr('cx', 100)
+          .attr('cy', 100)
+          .attr('fill', 'blue');
+
+  var rect = canvas.append('rect')
+          .attr('x', 250)
+          .attr('y', 250)
+          .attr('width', 50)
+          .attr('height', 50)
+          .on('mouseover', function(d, i) {
+            d3.select(this).transition()
+              .ease('cubic-out')
+              // .ease('cubic-in')
+              .ease('linear')
+              .duration('200')
+              .style("fill-opacity", 1)
+              .style("fill", "red");
+          })
+          .on('mouseout', function(d, i) {
+            d3.select(this).transition()
+              // .ease('cubic-out')
+              .ease('cubic-in')
+              // .ease('linear')
+              .duration('200')
+              .style("fill-opacity", 1)
+              .style("fill", "black");
+          })
+          .on('click', function(d, i) {
+            d3.select(this).transition()
+              .ease('linear')
+              .duration('200')
+              .style('fill-opacity', 1)
+              .style('fill', 'white');
+          });
+};
+
+pf.Main.prototype.modelTests = function() {
 
   var puzzle = new pf.Puzzle();
   puzzle.grid.initWithSize(10, 10);
@@ -96,4 +147,4 @@ pf.main = function() {
   common.log('minSquares: ' + defTest.getMinSquares());
   common.log('minRun: ' + defTest.getMinRun());
   common.log('maxRun: ' + defTest.getMaxRun());
-}
+};
