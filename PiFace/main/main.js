@@ -6,17 +6,52 @@ pf.Main.prototype.main = function() {
   common.log('pf.Main.main()');
   // this.modelTests();
 
-  this.d3Tests();
+  // this.d3Tests();
+
+  this.drawTests();
 }
+
+var drawTestsData = [];
+var draw = null;
+pf.Main.prototype.drawTests = function() {
+  drawTestsData = [new pf.Square(), new pf.Square(), new pf.Square(), new pf.Square(), new pf.Square()];
+  draw = new pf.Draw();
+  draw.drawSquares(drawTestsData);
+};
+
+var testData = [];
+var testData1 = {'color':'red'};
+
+pf.Main.prototype.d3Update = function() {
+  var canvas = d3.select('body').select('svg');
+
+  var circles = canvas.selectAll('circle').data(testData);
+
+  // enter selection
+  circles.enter().append('circle');
+
+  // update selection
+  circles.attr('r', 100)
+          .attr('cx', function(d, i) { return 100 + (i * 200); })
+          .attr('cy', 100)
+          // .attr('fill', 'blue');
+          .attr('fill', function(d, i) { return d.color; } );
+
+  // exit selection
+  circles.exit().remove();
+};
 
 pf.Main.prototype.d3Tests = function() {
   var canvas = d3.select('body').append('svg').attr('width', 500).attr('height', 500);
 
-  var circle = canvas.append('circle')
+  testData = [testData1, {'color':'blue'}];
+
+  var circle = canvas.selectAll('circle').data(testData).enter().append('circle')
           .attr('r', 100)
-          .attr('cx', 100)
+          .attr('cx', function(d, i) { return 100 + (i * 200); })
           .attr('cy', 100)
-          .attr('fill', 'blue');
+          // .attr('fill', 'blue');
+          .attr('fill', function(d, i) { return d.color; } );
 
   var rect = canvas.append('rect')
           .attr('x', 250)
