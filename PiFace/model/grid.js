@@ -53,21 +53,18 @@ pf.Grid.prototype.getSquare = function(x, y) {
   return null;
 };
 
-pf.Grid.prototype.getRow = function(j) {
+pf.Grid.prototype.getRow = function(y) {
   if ( ! common.isArray(this.squares) )
     return null;
 
   var rowSquares = [];
 
   // go through each column (~width)
-  for (var i = 0; i < this.squares.length; i++) {
-    // go through the row (square) in the column (~height = i)
-    if ( common.isArray(this.squares[i]) && common.arrayContainsIndex(this.squares[i], j) && this.squares[i][j] instanceof pf.Square )
-      rowSquares.push(this.squares[i][j]);
+  for (var x = 0; x < this.squares.length; x++) {
+    // go through the row (square) in the column (~height = y)
+    if ( common.isArray(this.squares[x]) && common.arrayContainsIndex(this.squares[x], y) && this.squares[x][y] instanceof pf.Square )
+      rowSquares.push(this.squares[x][y]);
   }
-
-  // common.log('rowSquares in getRow():');
-  // common.log(rowSquares);
 
   var row = new pf.Row();
   row.initWithSquares(rowSquares);
@@ -75,26 +72,14 @@ pf.Grid.prototype.getRow = function(j) {
   return row;
 };
 
-pf.Grid.prototype.getColumn = function(i) {
+pf.Grid.prototype.getColumn = function(x) {
   if ( ! common.isArray(this.squares) )
     return null;
 
   var rowSquares = [];
 
-  // go through each column (~width)
-  // for (var i = 0; i < this.squares.length; i++) {
-    // go through the row (square) in the column (~height = i)
-    // var columnSquares = [];
-    // for (var j = 0; j < height; j++) {
-    //   // placeholder new Square in each spot
-    //   columnSquares.push(new pf.Square());
-    // }
-  if ( common.isArray(this.squares) && common.arrayContainsIndex(this.squares, i) ) // && this.squares[i][j] instanceof pf.Square)
-    rowSquares = this.squares[i];
-  // }
-
-  // common.log('rowSquares in getColumn():');
-  // common.log(rowSquares);
+  if ( common.isArray(this.squares) && common.arrayContainsIndex(this.squares, x) )
+    rowSquares = this.squares[x];
 
   var row = new pf.Row();
   row.initWithSquares(rowSquares);

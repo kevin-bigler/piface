@@ -53,6 +53,11 @@ pf.Main.prototype.gridSquaresFlatTest = function() {
   common.log('col0:');
   common.log(col0);
   common.log(col0.toString());
+
+  var row1 = grid.getRow(1);
+  common.log('row1:');
+  common.log(row1);
+  common.log(row1.toString());
 };
 
 var drawTestsData = [];

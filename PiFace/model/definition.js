@@ -66,6 +66,11 @@ pf.Definition.prototype.getMaxRun = function() {
 };
 
 pf.Definition.prototype.toString = function() {
+  // TODO
+  
+};
+
+pf.Definition.prototype.toString = function() {
   if ( ! common.isArray(this.runs) )
     return 0;
 

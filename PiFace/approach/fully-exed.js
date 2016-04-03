@@ -6,3 +6,7 @@ pf.approach.FullyExed = function() {
 
 // pf.approach.FullyExed.prototype.property = value;
 // pf.approach.FullyExed.prototype.func = function() {};
+
+pf.approach.FullyExed.prototype.getSolvingActions = function(row, definition) {
+
+};

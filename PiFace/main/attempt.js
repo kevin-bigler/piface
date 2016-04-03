@@ -1,3 +1,4 @@
+// TODO not really sure I need this -- may just delete later
 pf.Attempt = function() {
   this.row = null;
   this.definition = null;

@@ -6,3 +6,7 @@ pf.approach.FullyFilled = function() {
 
 // pf.approach.FullyFilled.prototype.property = value;
 // pf.approach.FullyFilled.prototype.func = function() {};
+
+pf.approach.FullyFilled.prototype.getSolvingActions = function(row, definition) {
+
+};

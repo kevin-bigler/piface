@@ -1,7 +1,7 @@
 pf.Action = function() {
   // this.foos = ball;
-  this.fromState = null; //pf.SquareState.UNDEFINED;
-  this.toState = null; pf.SquareState.UNDEFINED;
+  this.fromState = null; // pf.SquareState.UNDEFINED;
+  this.toState = null;   // pf.SquareState.UNDEFINED;
   this.i = -1;
   this.x = -1;
   this.y = -1;
@@ -16,10 +16,3 @@ pf.Action = function() {
 
 // pf.Action.prototype.property = value;
 // pf.Action.prototype.func = function() {};
-
-// pf.Action.prototype.func = function() {};
-// pf.Action.prototype.func = function() {};
-// pf.Action.prototype.func = function() {};
-// pf.Action.prototype.func = function() {};
-
-// TODO functions or something maybe?

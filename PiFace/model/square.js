@@ -19,6 +19,13 @@ pf.Square.prototype.setVacant = function() { this.state = pf.SquareState.VACANT;
 pf.Square.prototype.setFilled = function() { this.state = pf.SquareState.FILLED; };
 pf.Square.prototype.setExed = function() { this.state = pf.SquareState.EXED; };
 
+pf.Square.prototype.copy = function() {
+  var copy = new pf.Square();
+  copy.state = this.state;
+  
+  return copy;
+};
+
 pf.Square.prototype.toString = function() {
   var stringMap = {};
   stringMap[pf.SquareState.VACANT] = 'o';

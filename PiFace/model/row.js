@@ -19,6 +19,7 @@ pf.Row.prototype.initWithLength = function(length) {
     // placeholder new Square in each spot
     this.squares.push(new pf.Square());
   }
+  this.length = length;
 };
 
 pf.Row.prototype.initWithSquares = function(squares) {
@@ -28,6 +29,7 @@ pf.Row.prototype.initWithSquares = function(squares) {
   }
 
   this.squares = squares;
+  this.length = squares.length;
 };
 
 // Note: empty array still returns true (intentionally).
@@ -144,10 +146,18 @@ pf.Row.prototype.getRuns = function() {
     }
 
     prevSquare = e;
-    
+
   });
 
   return runs;
+};
+
+pf.Row.prototype.copy = function() {
+  var copy = new pf.Row();
+  var squaresCopy = pf.utils.copySquares(this.squares);
+  copy.initWithSquares(squaresCopy);
+
+  return copy;
 };
 
 pf.Row.prototype.toString = function() {
