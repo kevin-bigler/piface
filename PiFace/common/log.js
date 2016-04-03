@@ -19,6 +19,9 @@ common.log = function(output) {
   // console.log('common.log(), output: ');
   console.log(output);
 
-  // $('#log-output').append('<br>');
-  // $('#log-output').append(outputString);
+  if ($('#log-output').length < 1)
+    $('body').append('div').attr('id', 'log-output');
+
+  $('#log-output').append('<br>');
+  $('#log-output').append(outputString);
 }

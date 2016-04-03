@@ -4,12 +4,56 @@ pf.Main = function() {
 
 pf.Main.prototype.main = function() {
   common.log('pf.Main.main()');
+
+  common.log();
   // this.modelTests();
 
   // this.d3Tests();
 
-  this.drawTests();
+  // this.drawTests();
+
+  this.gridSquaresFlatTest();
+
+  // this.conversionTests();
 }
+
+pf.Main.prototype.conversionTests = function() {
+  common.log('conversionTests()');
+
+  var rowLength = 3;
+  var i = 5;
+
+  var x = common.conversions.iToX(i, rowLength);
+  var y = common.conversions.iToY(i, rowLength);
+  var xy = common.conversions.iToXy(i, rowLength);
+  var iComputed = common.conversions.xyToI(x, y, rowLength);
+
+  common.log('let rowLength = ' + rowLength + ', i = ' + i);
+  common.log('x: ' + x);
+  common.log('y: ' + y);
+  common.log('xy: ');
+  common.log(xy);
+
+  common.log('iComputed: ' + iComputed);
+};
+
+pf.Main.prototype.gridSquaresFlatTest = function() {
+  common.log('gridSquaresFlatTest()');
+
+  var grid = new pf.Grid();
+  grid.initWithSize(2, 2);
+
+  grid.getSquare(0, 1).setFilled();
+
+  var gridSquaresFlatArray = grid.getSquaresFlatArray();
+  common.log('gridSquaresFlatArray:');
+  common.log(gridSquaresFlatArray);
+
+  var col0 = grid.getColumn(0);
+  common.log('col0:');
+  common.log(col0);
+  common.log(col0.toString());
+};
 
 var drawTestsData = [];
 var draw = null;

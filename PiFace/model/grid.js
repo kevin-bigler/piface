@@ -43,7 +43,7 @@ pf.Grid.prototype.getSquare = function(x, y) {
   // common.log('grid squares for lookup:');
   // common.log(this.squares);
 
-  if (common.arrayContainsIndex(this.squares, x) && common.arrayContainsIndex(this.squares[x], y)) {
+  if ( common.arrayContainsIndex(this.squares, x) && common.arrayContainsIndex(this.squares[x], y) ) {
     // common.log('we can get x, y');
     return this.squares[x][y];
   } else {
@@ -62,12 +62,7 @@ pf.Grid.prototype.getRow = function(j) {
   // go through each column (~width)
   for (var i = 0; i < this.squares.length; i++) {
     // go through the row (square) in the column (~height = i)
-    // var columnSquares = [];
-    // for (var j = 0; j < height; j++) {
-    //   // placeholder new Square in each spot
-    //   columnSquares.push(new pf.Square());
-    // }
-    if ( common.isArray(this.squares[i]) && common.arrayContainsIndex(this.squares[i], j) && this.squares[i][j] instanceof pf.Square)
+    if ( common.isArray(this.squares[i]) && common.arrayContainsIndex(this.squares[i], j) && this.squares[i][j] instanceof pf.Square )
       rowSquares.push(this.squares[i][j]);
   }
 
@@ -105,6 +100,27 @@ pf.Grid.prototype.getColumn = function(i) {
   row.initWithSquares(rowSquares);
 
   return row;
+};
+
+pf.Grid.prototype.getSquaresFlatArray = function() {
+  if ( ! common.isArray(this.squares) || ! this.width || ! this.height || ! common.isNumber(this.width) || ! common.isNumber(this.height) )
+    return [];
+
+  var flatArray = [];
+  var totalSquares = this.width * this.height;
+  for (var i = 0; i < totalSquares; i++) {
+    var x = common.conversions.iToX(i, this.width);
+    var y = common.conversions.iToY(i, this.width);
+    var square = this.getSquare(x, y);
+    if (square)
+      flatArray.push(square);
+  }
+
+  // I'm not sure if this is better, but I could also do getRow() for this.height times, concatenating all row squares arrays.
+  // this way I don't have to mess with instantiating pf.Row at all, though, which is probably ideal
+  // so probably don't change this
+
+  return flatArray;
 };
 
 pf.Grid.prototype.toString = function() {
