@@ -1,7 +1,7 @@
 pf.Action = function() {
   // this.foos = ball;
-  this.fromState = pf.SquareState.UNDEFINED;
-  this.toState = pf.SquareState.UNDEFINED;
+  this.fromState = null; //pf.SquareState.UNDEFINED;
+  this.toState = null; pf.SquareState.UNDEFINED;
   this.i = -1;
   this.x = -1;
   this.y = -1;

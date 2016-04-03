@@ -10,9 +10,9 @@ pf.Main.prototype.main = function() {
 
   // this.d3Tests();
 
-  // this.drawTests();
+  this.drawTests();
 
-  this.gridSquaresFlatTest();
+  // this.gridSquaresFlatTest();
 
   // this.conversionTests();
 }
@@ -56,11 +56,16 @@ pf.Main.prototype.gridSquaresFlatTest = function() {
 };
 
 var drawTestsData = [];
+var rowLength = null;
 var draw = null;
 pf.Main.prototype.drawTests = function() {
-  drawTestsData = [new pf.Square(), new pf.Square(), new pf.Square(), new pf.Square(), new pf.Square()];
+  var grid = new pf.Grid();
+  grid.initWithSize(5, 5);
+  drawTestsData = grid.getSquaresFlatArray();
+  // drawTestsData = [new pf.Square(), new pf.Square(), new pf.Square(), new pf.Square()];
+  rowLength = grid.width;
   draw = new pf.Draw();
-  draw.drawSquares(drawTestsData);
+  draw.drawSquares(drawTestsData, rowLength);
 };
 
 var testData = [];

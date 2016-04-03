@@ -7,7 +7,7 @@ pf.Draw = function() {
   this.startX = 25;
   this.startY = 25;
 
-  this.canvas = d3.select('body').append('svg').attr('width', 500).attr('height', 500);
+  this.canvas = d3.select('body').append('svg').attr('width', 1000).attr('height', 1000);
   this.squareRects = this.canvas.selectAll('rect');   // TODO probably select <g> elements (groups), and either way with a more defined selector (e.g. 'rect.pf-square') or something
 };
 
@@ -59,20 +59,43 @@ pf.Draw.prototype.drawSquares = function(squares, rowLength) {
   var self = this;
   // update selection
   this.squareRects
-          .attr('x', function(d, i) { return self.startX + (i * (self.squareWidth + 5)); })
-          .attr('y', this.startY)
+          .attr('x', function(d, i) {
+            var x = common.conversions.iToX(i, rowLength);
+            return self.startX + (x * (self.squareWidth + 5));
+          })
+          .attr('y', function(d, i) {
+            var y = common.conversions.iToY(i, rowLength);
+            return self.startY + (y * (self.squareHeight + 5));
+          })
           .attr('width', this.squareWidth)
           .attr('height', this.squareHeight)
           .style('stroke-width', 3)
           .style('stroke', 'black')
           .attr('fill', function(d, i) {
-            // return i % 2 ? 'orange' : 'blue';
             var colorMap = {};
-            colorMap[pf.SquareState.VACANT] = 'gray';
+            colorMap[pf.SquareState.VACANT] = 'white';
             colorMap[pf.SquareState.FILLED] = 'blue';
             colorMap[pf.SquareState.EXED] = 'red';
 
             return colorMap[d.state];
+          })
+          .on('mouseover', function(d, i) {
+            d3.select(this).transition()
+              .ease('cubic-out')
+              // .ease('linear')
+              .duration('200')
+              // .style("fill-opacity", 1)
+              // .style("fill", "red");
+              .style('stroke', 'gray');
+          })
+          .on('mouseout', function(d, i) {
+            d3.select(this).transition()
+              .ease('cubic-in')
+              // .ease('linear')
+              .duration('200')
+              // .style("fill-opacity", 1)
+              // .style("fill", "black");
+              .style('stroke', 'black');
           })
           .on('click', function(d, i) {
               common.log('on square click');
@@ -97,7 +120,7 @@ pf.Draw.prototype.drawSquares = function(squares, rowLength) {
 
               d.state = nextStateMap[d.state];
 
-              self.drawSquares(squares);
+              self.drawSquares(squares, rowLength);
           });
 
   // exit selection
