@@ -16,21 +16,25 @@ pf.Main.prototype.main = function() {
 
   // this.conversionTests();
 
-  // this.approachTestsSolvedButIncomplete();
+  this.approachTestsSolvedButIncomplete();
 
-  // this.approachTestsFullyExed();
+  this.approachTestsFullyExed();
 
   this.approachTestsFullyFilled();
 }
 
 pf.Main.prototype.approachTestsFullyFilled = function() {
+  common.log();
   common.log('approachTestsFullyFilled()');
+
+  var definition = new pf.Definition();
+  definition.initWithRuns([5]);
+  common.log('definition: ' + definition.toString());
+
   var row = new pf.Row();
   row.initWithLength(5);
   common.log('row before solving:' + row.toString());
 
-  var definition = new pf.Definition();
-  definition.initWithRuns([5]);
   var approach = new pf.approach.FullyFilled();
   approach.solve(row, definition);
 
@@ -39,13 +43,17 @@ pf.Main.prototype.approachTestsFullyFilled = function() {
 };
 
 pf.Main.prototype.approachTestsFullyExed = function() {
+  common.log();
   common.log('approachTestsFullyExed()');
+
+  var definition = new pf.Definition();
+  definition.initWithRuns([0]);
+  common.log('definition: ' + definition.toString());
+
   var row = new pf.Row();
   row.initWithLength(5);
   common.log('row before solving:' + row.toString());
 
-  var definition = new pf.Definition();
-  definition.initWithRuns([0]);
   var approach = new pf.approach.FullyExed();
   approach.solve(row, definition);
 
@@ -53,7 +61,13 @@ pf.Main.prototype.approachTestsFullyExed = function() {
 };
 
 pf.Main.prototype.approachTestsSolvedButIncomplete = function() {
+  common.log();
   common.log('approachTestsSolvedButIncomplete()');
+
+  var definition = new pf.Definition();
+  definition.initWithRuns([2, 1]);
+  common.log('definition: ' + definition.toString());
+
   var row = new pf.Row();
   row.initWithLength(5);
   row.fillSquare(0);
@@ -61,8 +75,6 @@ pf.Main.prototype.approachTestsSolvedButIncomplete = function() {
   row.fillSquare(4);
   common.log('row before solving:' + row.toString());
 
-  var definition = new pf.Definition();
-  definition.initWithRuns([2, 1]);
   var approach = new pf.approach.SolvedButIncomplete();
   approach.solve(row, definition);
 
