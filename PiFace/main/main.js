@@ -10,12 +10,64 @@ pf.Main.prototype.main = function() {
 
   // this.d3Tests();
 
-  this.drawTests();
+  // this.drawTests();
 
   // this.gridSquaresFlatTest();
 
   // this.conversionTests();
+
+  // this.approachTestsSolvedButIncomplete();
+
+  // this.approachTestsFullyExed();
+
+  this.approachTestsFullyFilled();
 }
+
+pf.Main.prototype.approachTestsFullyFilled = function() {
+  common.log('approachTestsFullyFilled()');
+  var row = new pf.Row();
+  row.initWithLength(5);
+  common.log('row before solving:' + row.toString());
+
+  var definition = new pf.Definition();
+  definition.initWithRuns([5]);
+  var approach = new pf.approach.FullyFilled();
+  approach.solve(row, definition);
+
+  common.log('row after solving:' + row.toString());
+
+};
+
+pf.Main.prototype.approachTestsFullyExed = function() {
+  common.log('approachTestsFullyExed()');
+  var row = new pf.Row();
+  row.initWithLength(5);
+  common.log('row before solving:' + row.toString());
+
+  var definition = new pf.Definition();
+  definition.initWithRuns([0]);
+  var approach = new pf.approach.FullyExed();
+  approach.solve(row, definition);
+
+  common.log('row after solving:' + row.toString());
+};
+
+pf.Main.prototype.approachTestsSolvedButIncomplete = function() {
+  common.log('approachTestsSolvedButIncomplete()');
+  var row = new pf.Row();
+  row.initWithLength(5);
+  row.fillSquare(0);
+  row.fillSquare(1);
+  row.fillSquare(4);
+  common.log('row before solving:' + row.toString());
+
+  var definition = new pf.Definition();
+  definition.initWithRuns([2, 1]);
+  var approach = new pf.approach.SolvedButIncomplete();
+  approach.solve(row, definition);
+
+  common.log('row after solving:' + row.toString());
+};
 
 pf.Main.prototype.conversionTests = function() {
   common.log('conversionTests()');

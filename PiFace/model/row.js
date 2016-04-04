@@ -2,7 +2,7 @@ pf.Row = function() {
   // this.foos = ball;
   this.length = 0;
   this.squares = [];
-  this.definition = new pf.Definition();
+  // this.definition = new pf.Definition();
 };
 
 // pf.Row.prototype.property = value;
@@ -119,12 +119,29 @@ pf.Row.prototype.isComplete = function() {
   return isComplete;
 };
 
-pf.Row.prototype.isSolved = function() {
-  if ( ! common.isArray(this.squares) )
+pf.Row.prototype.isSolved = function(definition) {
+  if ( ! common.isArray(this.squares) || ! pf.utils.definitionIsSet(definition) || ! common.isArray(definition.runs) )
     return false;
 
-  // TODO this depends on a definition
-  return false;
+  var rowRuns = this.getRuns();
+  var rowTotalFilled = this.getTotalFilled();
+
+  // rowRuns.length == definition.runs.length
+  // for each of rowRuns, rowRuns[i] == definition.runs[i]
+
+  // if definition is a '0' and we have no row runs, then the row is solved.
+  if (rowTotalFilled === 0 && definition.getTotalFilled() === 0)
+    return true;
+
+  if (rowRuns.length !== definition.runs.length)
+    return false;
+
+  $.each(rowRuns, function(i, e) {
+    if (rowRuns[i] !== definition.runs[i])
+      return false;
+  });
+
+  return true;
 };
 
 pf.Row.prototype.getRuns = function() {
@@ -150,6 +167,19 @@ pf.Row.prototype.getRuns = function() {
   });
 
   return runs;
+};
+
+pf.Row.prototype.getTotalFilled = function() {
+  if ( ! common.isArray(this.squares) )
+    return 0;
+
+  var totalFilled = 0;
+  $.each(this.squares, function(i, e) {
+    if (pf.utils.squareIsSet(e) && e.isFilled())
+      totalFilled++;
+  });
+
+  return totalFilled;
 };
 
 pf.Row.prototype.copy = function() {

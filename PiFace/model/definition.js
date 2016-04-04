@@ -65,9 +65,12 @@ pf.Definition.prototype.getMaxRun = function() {
   return sortedRuns.pop();
 };
 
-pf.Definition.prototype.toString = function() {
-  // TODO
-  
+pf.Definition.prototype.copy = function() {
+  var copy = new pf.Definition();
+  var runsCopy = common.copyArray(this.runs);
+  copy.initWithRuns(runsCopy);
+
+  return copy;
 };
 
 pf.Definition.prototype.toString = function() {

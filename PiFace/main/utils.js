@@ -5,7 +5,16 @@ pf.utils = {
   squareIsSet: function(variable) { return variable !== null && variable !== undefined && variable instanceof pf.Square; },
   definitionIsSet: function(variable) { return variable !== null && variable !== undefined && variable instanceof pf.Definition; },
   copySquares: function(variables) {
-    // TODO
+    if ( ! common.isArray(variables) )
+      return variables;
+
+    var copy = [];
+    $.each(variables, function(i, e) {
+      if ( pf.utils.squareIsSet(e) )
+        copy.push(e.copy());
+    });
+
+    return copy;
   },
   // TODO all other copy Xs functions for each model (Puzzle, Grid, Row, Definition)
   getRowTransformationActions: function(rowA, rowB) {
