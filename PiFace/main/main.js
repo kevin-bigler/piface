@@ -16,12 +16,55 @@ pf.Main.prototype.main = function() {
 
   // this.conversionTests();
 
-  this.approachTestsSolvedButIncomplete();
+  // this.approachTestsSolvedButIncomplete();
+  //
+  // this.approachTestsFullyExed();
+  //
+  // this.approachTestsFullyFilled();
+  //
+  this.approachTestRunEqualsMaxDefinition();
 
-  this.approachTestsFullyExed();
-
-  this.approachTestsFullyFilled();
+  // this.rowRunsAsIndexesTest();
 }
+
+pf.Main.prototype.rowRunsAsIndexesTest = function() {
+  var row = new pf.Row();
+  row.initWithLength(5);
+  row.fillSquare(0);
+  row.fillSquare(1);
+  row.fillSquare(4);
+
+  var rowRuns = row.getRuns();
+  var rowRunsAsIndexes = row.getRunsAsIndexes();
+
+  common.log('rowRuns: ');
+  common.log(rowRuns);
+
+  common.log('rowRunsAsIndexes: ');
+  common.log(rowRunsAsIndexes);
+
+};
+
+pf.Main.prototype.approachTestRunEqualsMaxDefinition = function() {
+  common.log();
+  common.log('approachTestsFullyFilled()');
+
+  var definition = new pf.Definition();
+  definition.initWithRuns([2,1]);
+  common.log('definition: ' + definition.toString());
+
+  var row = new pf.Row();
+  row.initWithLength(5);
+  row.fillSquare(1);
+  row.fillSquare(2);
+  common.log('row before solving:' + row.toString());
+
+  var approach = new pf.approach.RunEqualsMaxDefinition();
+  approach.solve(row, definition);
+
+  common.log('row after solving:' + row.toString());
+
+};
 
 pf.Main.prototype.approachTestsFullyFilled = function() {
   common.log();

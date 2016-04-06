@@ -169,6 +169,32 @@ pf.Row.prototype.getRuns = function() {
   return runs;
 };
 
+// 90% of the code is duplicated from getRuns(), so idk if I should somehow consolidate, ie make more DRY
+pf.Row.prototype.getRunsAsIndexes = function() {
+  if ( ! common.isArray(this.squares) )
+    return [];
+
+  var squareIsFilled = function(sq) { return sq && sq instanceof pf.Square && sq.isFilled() };
+  var isLastValueArray = function(arr) { return common.isArray(arr) && arr.length > 0 && common.isArray(arr[arr.length - 1]) };
+
+  var runs = [];
+  var prevSquare = null;
+  $.each(this.squares, function(i, e) {
+
+    if ( squareIsFilled(e) ) {
+      if ( i > 0 && squareIsFilled(prevSquare) && isLastValueArray(runs) )
+        runs[runs.length - 1].push(i);
+      else
+        runs.push([i]);
+    }
+
+    prevSquare = e;
+
+  });
+
+  return runs;
+};
+
 pf.Row.prototype.getTotalFilled = function() {
   if ( ! common.isArray(this.squares) )
     return 0;
