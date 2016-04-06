@@ -22,7 +22,7 @@ pf.Square.prototype.setExed = function() { this.state = pf.SquareState.EXED; };
 pf.Square.prototype.copy = function() {
   var copy = new pf.Square();
   copy.state = this.state;
-  
+
   return copy;
 };
 

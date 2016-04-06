@@ -16,3 +16,15 @@ pf.Action = function() {
 
 // pf.Action.prototype.property = value;
 // pf.Action.prototype.func = function() {};
+
+pf.Action.prototype.do = function(square) {
+  if (pf.utils.squareIsSet(square))
+    square.state = this.toState;
+};
+
+pf.Action.prototype.undo = function(square) {
+  if (pf.utils.squareIsSet(square))
+    square.state = this.fromState;
+};
+
+// TODO maybe do/undo functions for row & grid? not sure if that's ideal though (b/c of how the index and x,y are maintained etc)
