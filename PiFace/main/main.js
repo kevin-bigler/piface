@@ -47,7 +47,7 @@ pf.Main.prototype.rowRunsAsIndexesTest = function() {
 
 pf.Main.prototype.approachTestRunEqualsMaxDefinition = function() {
   common.log();
-  common.log('approachTestsFullyFilled()');
+  common.log('approachTestRunEqualsMaxDefinition()');
 
   var definition = new pf.Definition();
   definition.initWithRuns([2,1]);
@@ -60,9 +60,19 @@ pf.Main.prototype.approachTestRunEqualsMaxDefinition = function() {
   common.log('row before solving:' + row.toString());
 
   var approach = new pf.approach.RunEqualsMaxDefinition();
-  approach.solve(row, definition);
+  // approach.solve(row, definition);
+  var solvingActions = approach.getSolvingActions(row, definition);
+
+  common.log('solvingActions:' );
+  common.log(solvingActions);
+
+  pf.utils.doActionsToRow(solvingActions, row);
 
   common.log('row after solving:' + row.toString());
+
+  pf.utils.undoActionsToRow(solvingActions, row, true);
+
+  common.log('row after undoing:' + row.toString());
 
 };
 

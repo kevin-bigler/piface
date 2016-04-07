@@ -23,6 +23,9 @@ pf.utils = {
       return null;
 
     // squareA = "before"; squareB = "after"
+    if (squareA.state === squareB.state)
+      return null;
+
     var action = new pf.Action();
     action.fromState = squareA.state;
     action.toState = squareB.state;
@@ -81,11 +84,13 @@ pf.utils = {
       }
     });
   },
-  undoActionsToRow: function(actions, row) {
+  undoActionsToRow: function(actions, row, reverse) {
     if ( ! common.isArray(actions) || ! pf.utils.rowIsSet(row) )
       return;
 
-    $.each(actions, function(i, e) {
+    var actionsToLoop = reverse ? actions.slice().reverse() : actions;
+
+    $.each(actionsToLoop, function(i, e) {
       if ( pf.utils.actionIsSet(e) ) {
         e.undo(row.getSquare(e.i));
       }
@@ -95,7 +100,9 @@ pf.utils = {
     if ( ! common.isArray(actions) || ! pf.utils.gridIsSet(grid) )
       return;
 
-    $.each(actions, function(i, e) {
+    var actionsToLoop = reverse ? actions.slice().reverse() : actions;
+
+    $.each(actionsToLoop, function(i, e) {
       if ( pf.utils.actionIsSet(e) ) {
         e.undo(grid.getSquare(e.x, e.y));
       }
