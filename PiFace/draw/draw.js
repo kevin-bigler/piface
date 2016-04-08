@@ -7,8 +7,11 @@ pf.Draw = function() {
   this.startX = 25;
   this.startY = 25;
 
-  this.canvas = d3.select('body').append('svg').attr('width', 1000).attr('height', 1000);
+  this.canvas = d3.select('body').append('svg').attr('width', 2000).attr('height', 1500);
   this.squareRects = this.canvas.selectAll('rect');   // TODO probably select <g> elements (groups), and either way with a more defined selector (e.g. 'rect.pf-square') or something
+
+  this.vcrControls = this.canvas.append('g').attr('id', 'vcr-controls').attr('width', 50).attr('height', 50).attr('transform', 'translate(15, 15)').style('fill', 'gray').append('rect').attr('width', 35).attr('height', 35);
+  this.vcrControls.style('fill', 'red');
 };
 
 // pf.Draw.prototype.property = value;

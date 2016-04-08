@@ -10,7 +10,7 @@ pf.Main.prototype.main = function() {
 
   // this.d3Tests();
 
-  // this.drawTests();
+  this.drawTests();
 
   // this.gridSquaresFlatTest();
 
@@ -22,13 +22,17 @@ pf.Main.prototype.main = function() {
   //
   // this.approachTestsFullyFilled();
   //
-  this.approachTestRunEqualsMaxDefinition();
+  // this.approachTestRunEqualsMaxDefinition();
 
   // this.rowRunsAsIndexesTest();
 
   // TODO create tests for ActionController
   // probably easiest to do if paired with some UI buttons with visual indication of has<method> (ie hasNext and hasPrev) or something
 }
+
+pf.Main.prototype.drawVcrTest = function() {
+  
+};
 
 pf.Main.prototype.rowRunsAsIndexesTest = function() {
   var row = new pf.Row();
