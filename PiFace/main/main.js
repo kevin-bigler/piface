@@ -25,6 +25,9 @@ pf.Main.prototype.main = function() {
   this.approachTestRunEqualsMaxDefinition();
 
   // this.rowRunsAsIndexesTest();
+
+  // TODO create tests for ActionController
+  // probably easiest to do if paired with some UI buttons with visual indication of has<method> (ie hasNext and hasPrev) or something
 }
 
 pf.Main.prototype.rowRunsAsIndexesTest = function() {

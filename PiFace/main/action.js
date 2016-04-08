@@ -17,14 +17,38 @@ pf.Action = function() {
 // pf.Action.prototype.property = value;
 // pf.Action.prototype.func = function() {};
 
-pf.Action.prototype.do = function(square) {
-  if (pf.utils.squareIsSet(square))
-    square.state = this.toState;
+/**
+  @param obj - any of either square, row, or grid
+*/
+pf.Action.prototype.do = function(obj) {
+  if (pf.utils.squareIsSet(obj)) {
+    obj.state = this.toState;
+
+  } else if (pf.utils.rowIsSet(obj)) {
+    var square = obj.getSquare(this.i);
+    this.do(square);
+
+  } else if (pf.utils.gridIsSet(obj)) {
+    var square = obj.getSquare(this.x, this.y);
+    this.do(square);
+
+  }
 };
 
-pf.Action.prototype.undo = function(square) {
-  if (pf.utils.squareIsSet(square))
-    square.state = this.fromState;
-};
+/**
+  @param obj - any of either square, row, or grid
+*/
+pf.Action.prototype.undo = function(obj) {
+  if (pf.utils.squareIsSet(obj)) {
+    obj.state = this.fromState;
 
-// TODO maybe do/undo functions for row & grid? not sure if that's ideal though (b/c of how the index and x,y are maintained etc)
+  } else if (pf.utils.rowIsSet(obj)) {
+    var square = obj.getSquare(this.i);
+    this.undo(square);
+
+  } else if (pf.utils.gridIsSet(obj)) {
+    var square = obj.getSquare(this.x, this.y);
+    this.undo(square);
+
+  }
+};
