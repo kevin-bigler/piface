@@ -10,7 +10,9 @@ pf.Main.prototype.main = function() {
 
   // this.d3Tests();
 
-  this.drawTests();
+  // this.drawTests();
+
+  this.moreDrawTests();
 
   // this.gridSquaresFlatTest();
 
@@ -30,8 +32,13 @@ pf.Main.prototype.main = function() {
   // probably easiest to do if paired with some UI buttons with visual indication of has<method> (ie hasNext and hasPrev) or something
 }
 
+pf.Main.prototype.moreDrawTests = function() {
+  var drawTests = new pf.DrawTests();
+  // drawTests.idAndClassElements();
+};
+
 pf.Main.prototype.drawVcrTest = function() {
-  
+
 };
 
 pf.Main.prototype.rowRunsAsIndexesTest = function() {
@@ -182,6 +189,10 @@ pf.Main.prototype.gridSquaresFlatTest = function() {
   common.log('row1:');
   common.log(row1);
   common.log(row1.toString());
+};
+
+pf.Main.prototype.drawTests = function() {
+  var drawTests = new pf.DrawTests();
 };
 
 var drawTestsData = [];
