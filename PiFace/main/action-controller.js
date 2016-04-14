@@ -5,13 +5,21 @@ pf.ActionController = function() {
   this.actionIndex = -1;  // init these values at -1 so that "next" incrementing will get them to 0
   // this.row = null;
   // this.grid = null;
-  this.subject = null;
+  this.subject = null;  // subject is either an instance of pf.Row or pf.Grid or pf.Square (anything that a pf.Action can do/undo)
 };
 
 // pf.ActionController.prototype.property = value;
 // pf.ActionController.prototype.func = function() {};
 
 // TODO maybe functions for restart? that just moves indexes?
+
+pf.ActionController.prototype.initWithActions = function(actions) {
+  this.actions = actions;
+  // reset the indexes to starting positions
+  this.groupIndex = -1;
+  this.actionIndex = -1;
+  // TODO any other setup?
+};
 
 pf.ActionController.prototype.getCurrentAction = function() {
   return this.getActionWithIndexes(this.groupIndex, this.actionIndex);
@@ -90,6 +98,7 @@ pf.ActionController.prototype.next = function() {
 };
 
 pf.ActionController.prototype.prev = function() {
+  common.log('ActionController.prev()');
   if ( ! this.hasPrev() ) {
     common.log('cannot do prev()');
     return;
@@ -103,14 +112,15 @@ pf.ActionController.prototype.prev = function() {
     return;
 
   this.groupIndex--;
-  if ( common.isNonEmptyArray(this.actions[groupIndex]) )
-    this.actionIndex = this.actions[groupIndex].length - 1;
+  if ( common.isNonEmptyArray(this.actions[this.groupIndex]) )
+    this.actionIndex = this.actions[this.groupIndex].length - 1;
   else
     this.actionIndex = -1;
 
 };
 
 pf.ActionController.prototype.ff = function() {
+  common.log('ActionController.ff()');
   if ( ! this.hasFf() ) {
     common.log('cannot do ff()');
     return;
@@ -130,6 +140,7 @@ pf.ActionController.prototype.ff = function() {
 };
 
 pf.ActionController.prototype.rew = function() {
+  common.log('ActionController.rew()');
   if ( ! this.hasRew() ) {
     common.log('cannot do rew()');
     return;
@@ -144,6 +155,7 @@ pf.ActionController.prototype.rew = function() {
 };
 
 pf.ActionController.prototype.solve = function() {
+  common.log('ActionController.solve()');
   if ( ! this.hasSolve() ) {
     common.log('cannot do solve()');
     return;
@@ -155,6 +167,7 @@ pf.ActionController.prototype.solve = function() {
 };
 
 pf.ActionController.prototype.unsolve = function() {
+  common.log('ActionController.unsolve()');
   if ( ! this.hasUnsolve() ) {
     common.log('cannot do unsolve()');
     return;

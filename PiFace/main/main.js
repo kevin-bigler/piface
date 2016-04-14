@@ -33,8 +33,41 @@ pf.Main.prototype.main = function() {
 }
 
 pf.Main.prototype.moreDrawTests = function() {
+
+  var row = new pf.Row();
+  row.initWithLength(5);
+  row.fillSquare(1);
+  row.fillSquare(2);
+  drawTestsData = row.squares;
+  // drawTestsData = [new pf.Square(), new pf.Square(), new pf.Square(), new pf.Square()];
+  rowLength = row.length;
+  common.log('rowLength: ' );
+  common.log(rowLength);
+  draw = new pf.Draw();
+  draw.drawSquares(drawTestsData, rowLength);
+
+  var actions = [];
+  actions.push( this.approachTestRunEqualsMaxDefinition() );
+  actions.push( this.approachTestsSolvedButIncomplete() );
+
+  common.log();
+  common.log('actions:');
+  common.log(actions);
+
+  var actionController = new pf.ActionController();
+  actionController.initWithActions(actions);
+  actionController.subject = row;
+
   var drawTests = new pf.DrawTests();
+  drawTests.actionController = actionController;
+  drawTests.onUpdate = function() {
+    common.log('onUpdate()');
+    draw.drawSquares(drawTestsData, rowLength);
+  };
+  drawTests.initButtons();
   // drawTests.idAndClassElements();
+
+
 };
 
 pf.Main.prototype.drawVcrTest = function() {
@@ -64,7 +97,8 @@ pf.Main.prototype.approachTestRunEqualsMaxDefinition = function() {
   common.log('approachTestRunEqualsMaxDefinition()');
 
   var definition = new pf.Definition();
-  definition.initWithRuns([2,1]);
+  // definition.initWithRuns([2,1]);
+  definition.initWithRuns([2]);
   common.log('definition: ' + definition.toString());
 
   var row = new pf.Row();
@@ -77,17 +111,18 @@ pf.Main.prototype.approachTestRunEqualsMaxDefinition = function() {
   // approach.solve(row, definition);
   var solvingActions = approach.getSolvingActions(row, definition);
 
-  common.log('solvingActions:' );
-  common.log(solvingActions);
+  // common.log('solvingActions:' );
+  // common.log(solvingActions);
 
   pf.utils.doActionsToRow(solvingActions, row);
 
   common.log('row after solving:' + row.toString());
 
-  pf.utils.undoActionsToRow(solvingActions, row, true);
+  // pf.utils.undoActionsToRow(solvingActions, row, true);
+  //
+  // common.log('row after undoing:' + row.toString());
 
-  common.log('row after undoing:' + row.toString());
-
+  return solvingActions;
 };
 
 pf.Main.prototype.approachTestsFullyFilled = function() {
@@ -132,20 +167,25 @@ pf.Main.prototype.approachTestsSolvedButIncomplete = function() {
   common.log('approachTestsSolvedButIncomplete()');
 
   var definition = new pf.Definition();
-  definition.initWithRuns([2, 1]);
+  // definition.initWithRuns([2, 1]);
+  definition.initWithRuns([2]);
   common.log('definition: ' + definition.toString());
 
   var row = new pf.Row();
   row.initWithLength(5);
-  row.fillSquare(0);
+  row.exSquare(0);
   row.fillSquare(1);
-  row.fillSquare(4);
+  row.fillSquare(2);
+  row.exSquare(3);
   common.log('row before solving:' + row.toString());
 
   var approach = new pf.approach.SolvedButIncomplete();
+  var solvingActions = approach.getSolvingActions(row, definition);
   approach.solve(row, definition);
 
   common.log('row after solving:' + row.toString());
+
+  return solvingActions;
 };
 
 pf.Main.prototype.conversionTests = function() {
@@ -191,9 +231,9 @@ pf.Main.prototype.gridSquaresFlatTest = function() {
   common.log(row1.toString());
 };
 
-pf.Main.prototype.drawTests = function() {
-  var drawTests = new pf.DrawTests();
-};
+// pf.Main.prototype.drawTests = function() {
+//   var drawTests = new pf.DrawTests();
+// };
 
 var drawTestsData = [];
 var rowLength = null;
