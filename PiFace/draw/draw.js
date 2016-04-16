@@ -72,10 +72,10 @@ pf.Draw.prototype.drawSquares = function(squares, rowLength) {
   common.log('rowLength:' + rowLength);
 
   // re-map DOM to data (selection)
-  this.squareRects = this.canvas.selectAll('rect').data(squares);  // TODO selection change mentionied in constructor
+  this.squareRects = this.canvas.selectAll('rect.square').data(squares);  // TODO selection change mentionied in constructor
 
   // enter selection
-  this.squareRects.enter().append('rect');                    // TODO selection change mentionied in constructor
+  this.squareRects.enter().append('rect').classed('square', true);                    // TODO selection change mentionied in constructor
 
   var self = this;
   // update selection

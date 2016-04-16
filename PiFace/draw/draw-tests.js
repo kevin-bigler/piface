@@ -43,8 +43,10 @@ pf.DrawTests.prototype.onButtonClick = function() {
   common.log('onButtonClick()');
 
   this.initButtons();
+
   if ( common.isFunction(this.onUpdate) )
     this.onUpdate();
+
 }
 
 pf.DrawTests.prototype.initButtons = function() {
@@ -161,8 +163,75 @@ pf.DrawTests.prototype.initButtons = function() {
     return "translate(" + (self.buttonsStartX + self.buttonWidth * d.x + self.buttonMarginX * d.x) + "," + (self.buttonsStartY + self.buttonHeight * d.y + self.buttonMarginY * d.y) + ")";
   });
 
-  // TODO use buttons.each(function(g, i) { d3.select(this).selectAll('rect').data(d) ... }) INSTEAD OF append()
+  // TODO use buttons.each(function(d, i) { d3.select(this).selectAll('rect').data(d) ... }) INSTEAD OF append()
   // -- do this for both rect and text
+  buttons.each(function(d, i) {
+    common.log('buttons.each()');
+    // var rect = d3.select(this).append('rect');
+    //rect
+    var rect = d3.select(this).selectAll('rect.button').data([d]);
+
+    rect.exit().remove();
+
+    rect.enter().append('rect')
+      .classed('button', true);
+
+    rect.attr('width', self.buttonWidth)
+      .attr('height', self.buttonHeight)
+      .attr('rx', self.buttonHeight / 2) //15)
+      .attr('ry', self.buttonHeight / 2) //15)
+      // .text(function(d, i) { return d.title; })
+      // .attr('x', function(d, i) {
+      //   return self.buttonsStartX + self.buttonWidth * i + self.buttonMarginX * i;
+      // })
+      // .attr('y', function(d, i) {
+      //   return self.buttonsStartY;
+      // })
+      .style('stroke-width', 2)
+      .style('stroke', 'black')
+      .attr('fill', function(d, i) {
+        return d.isEnabled() ? 'white' : 'lightgray';
+        // return i % 2 ? 'white' : 'lightgray';
+      })
+      .on('mouseover', function(d, i) {
+        if ( ! d.isEnabled() )
+          return;
+
+        d3.select(this).transition()
+          .ease('cubic-out')
+          // .ease('linear')
+          .duration('200')
+          // .style("fill-opacity", 1)
+          // .style("fill", "red");
+          .style('stroke', 'gray');
+      })
+      .on('mouseout', function(d, i) {
+        d3.select(this).transition()
+          .ease('cubic-in')
+          // .ease('linear')
+          .duration('200')
+          // .style("fill-opacity", 1)
+          // .style("fill", "black");
+          .style('stroke', 'black');
+      });
+
+      // text
+      var text = d3.select(this).selectAll('text').data([d]);
+
+      text.exit().remove();
+
+      text.enter().append('text')
+        .classed('unselectable', true)
+        .attr('unselectable', 'on');
+
+      text.style('text-anchor', 'middle')
+        // .style("alignment-baseline", "middle")
+        .attr('x', self.buttonWidth / 2)
+        .attr('y', self.buttonHeight / 2)
+        .attr('dy', '.35em')
+        .text(function(d, i) { return d.title; });
+  });
+  /*
   buttons.append('rect').classed('button', true)
     // .text(function(d, i) { return d.title; })
     .attr('width', this.buttonWidth)
@@ -202,7 +271,9 @@ pf.DrawTests.prototype.initButtons = function() {
         // .style("fill", "black");
         .style('stroke', 'black');
     });
+  */
 
+  /*
   buttons.append('text')
     .style("text-anchor", "middle")
     // .style("alignment-baseline", "middle")
@@ -210,6 +281,7 @@ pf.DrawTests.prototype.initButtons = function() {
     .attr("y", self.buttonHeight / 2)
     .attr("dy", ".35em")
     .text(function(d, i) { return d.title; });
+  */
 
   return buttons;
 };
