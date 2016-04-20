@@ -3,8 +3,8 @@ pf.DrawTests = function() {
 
   this.actionController = null;
 
-  this.buttonsStartX = 300;
-  this.buttonsStartY = 100;
+  this.buttonsStartX = 400;
+  this.buttonsStartY = 50;
   this.buttonWidth = 75;
   this.buttonHeight = 50;
   this.buttonMarginX = 5;
